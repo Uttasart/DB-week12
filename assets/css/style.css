@@ -1,0 +1,190 @@
+/* ===== ตัวแปรสี: แก้ที่นี่ที่เดียว สีทั้งเว็บเปลี่ยนตาม ===== */
+:root {
+    --bg: #070a11;          /* พื้นหลังหน้าเว็บ (ลึกกว่าการ์ด เพื่อให้การ์ดลอย) */
+    --card-top: #1a2438;    /* สีผิวการ์ดด้านบน (สว่าง = โดนแสง) */
+    --card-bottom: #0f1522; /* สีผิวการ์ดด้านล่าง (มืด = เงา) */
+    --card-edge: #26344f;
+    --accent: #3b9cff;
+    --accent-soft: rgba(59, 156, 255, 0.14);
+    --text: #e8edf7;
+    --muted: #93a1ba;
+
+    /* เงาซ้อนหลายชั้น: เงาคมใกล้ตัว + เงานุ่มไกลตัว = การ์ดดูลอยจากพื้น */
+    --lift:
+        0 1px 0 rgba(255, 255, 255, 0.06) inset,       /* ขอบบนสะท้อนแสง */
+        0 -1px 0 rgba(0, 0, 0, 0.5) inset,             /* ขอบล่างมืด */
+        0 2px 4px rgba(0, 0, 0, 0.5),                  /* เงาคมชิดตัว */
+        0 12px 24px rgba(0, 0, 0, 0.45),               /* เงากลาง */
+        0 28px 60px rgba(0, 0, 0, 0.5),                /* เงานุ่มไกล */
+        0 10px 40px rgba(59, 156, 255, 0.07);          /* แสงฟ้าจางใต้การ์ด */
+    --lift-hover:
+        0 1px 0 rgba(255, 255, 255, 0.09) inset,
+        0 -1px 0 rgba(0, 0, 0, 0.5) inset,
+        0 4px 8px rgba(0, 0, 0, 0.5),
+        0 20px 36px rgba(0, 0, 0, 0.5),
+        0 40px 80px rgba(0, 0, 0, 0.55),
+        0 14px 50px rgba(59, 156, 255, 0.16);
+}
+
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: "Sarabun", "Noto Sans Thai", Tahoma, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text);
+    /* แสงฟุ้งสีฟ้าด้านบน + ลายตารางบางๆ ให้พื้นหลังมีมิติ */
+    background:
+        radial-gradient(900px 420px at 50% -60px, rgba(59, 156, 255, 0.22), transparent 70%),
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px) 0 0 / 44px 44px,
+        var(--bg);
+    background-attachment: fixed;
+}
+.container {
+    width: min(960px, 92%);
+    margin: 30px auto;
+}
+
+/* ===== การ์ดลอยจากพื้นหลัง ===== */
+.card {
+    background: linear-gradient(180deg, var(--card-top) 0%, var(--card-bottom) 100%);
+    border: 1px solid var(--card-edge);
+    border-radius: 16px;
+    padding: 26px;
+    margin-bottom: 24px;
+    box-shadow: var(--lift);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--lift-hover);
+}
+
+/* ===== ส่วนบน (Hero) ===== */
+.hero {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    background: linear-gradient(135deg, #1b3563 0%, #0f1a30 55%, #0a0f1c 100%);
+    border-color: #2f4f86;
+}
+.hero p { color: #c3d3ee; margin: 4px 0; }
+.hero a { color: #fff; }
+.avatar {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 4px solid var(--accent);
+    box-shadow:
+        0 0 0 6px rgba(59, 156, 255, 0.15),
+        0 10px 24px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(59, 156, 255, 0.5);
+}
+h1 { margin: 0 0 8px; font-size: 2.1rem; line-height: 1.2; color: #fff; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); }
+.hero .headline { font-size: 1.1rem; color: #8fc4ff; }
+
+/* ===== หัวข้อแต่ละส่วน: แถบนูนเรืองแสง ===== */
+h2 {
+    margin: 0 0 18px;
+    padding: 10px 16px;
+    font-size: 1.35rem;
+    letter-spacing: 0.3px;
+    color: #fff;
+    background: linear-gradient(90deg, rgba(59, 156, 255, 0.4), rgba(59, 156, 255, 0.05));
+    border-left: 6px solid var(--accent);
+    border-bottom: none;
+    border-radius: 8px;
+    text-shadow: 0 0 12px rgba(59, 156, 255, 0.55);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.12) inset,
+        0 6px 14px rgba(0, 0, 0, 0.35);
+}
+h3 { margin: 0 0 4px; color: #fff; }
+
+/* ===== Education / Training: ไทม์ไลน์มีจุดเรืองแสง ===== */
+.item {
+    position: relative;
+    padding: 12px 0 12px 22px;
+    margin-left: 6px;
+    border-bottom: none;
+    border-left: 2px solid var(--card-edge);
+}
+.item::before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: 20px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #a6d2ff, var(--accent) 60%);
+    box-shadow: 0 0 0 3px rgba(59, 156, 255, 0.2), 0 0 12px var(--accent);
+}
+.item p { margin: 2px 0; color: var(--muted); }
+.item:last-child { border-bottom: none; }
+
+/* ===== ป้าย Skill: ปุ่มนูน ชี้แล้วลอยขึ้น ===== */
+.skills { display: flex; flex-wrap: wrap; gap: 12px; }
+.skill-badge {
+    background: linear-gradient(180deg, #1d3558 0%, #14233d 100%);
+    border: 1px solid #2c4d7e;
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    min-width: 130px;
+    font-weight: 700;
+    color: #fff;
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.1) inset,
+        0 3px 6px rgba(0, 0, 0, 0.45),
+        0 10px 18px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.skill-badge:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.14) inset,
+        0 6px 10px rgba(0, 0, 0, 0.45),
+        0 16px 28px rgba(0, 0, 0, 0.4),
+        0 0 22px rgba(59, 156, 255, 0.3);
+}
+.skill-badge span {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+/* กล่อง Lab task: เว้าลงไปในการ์ด (ตรงข้ามกับของที่นูน) */
+.note {
+    margin-top: 16px;
+    padding: 10px 14px;
+    background: rgba(5, 9, 16, 0.55);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    color: #bcd6f7;
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.55);
+}
+
+footer { text-align: center; color: var(--muted); padding: 15px; font-size: 0.9rem; }
+code { background: #05080f; color: #7cc0ff; padding: 2px 6px; border-radius: 4px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.7); }
+
+/* ผู้ใช้ที่ตั้งค่าลดการเคลื่อนไหวในระบบ จะไม่เห็นเอฟเฟกต์ลอย */
+@media (prefers-reduced-motion: reduce) {
+    .card, .skill-badge { transition: none; }
+    .card:hover, .skill-badge:hover { transform: none; }
+}
+
+/* ===== มือถือ ===== */
+@media (max-width: 650px) {
+    .hero { flex-direction: column; text-align: center; }
+    .avatar { width: 130px; height: 130px; }
+    h1 { font-size: 1.6rem; }
+    .card { padding: 18px; }
+    .skill-badge { flex: 1 1 45%; }
+}
